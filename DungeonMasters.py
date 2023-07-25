@@ -25,15 +25,15 @@ class warrior:
     dexterity = 8
     intelligence = 3
     charisma = 6
-    agility = 4
+    agility = 6
     faith = 10
 
 class rogue:
     health = 100
     mana = 100
-    strength = 3
+    strength = 5
     dexterity = 18
-    intelligence = 6
+    intelligence = 4
     charisma = 4
     agility = 10
     faith = 8
@@ -82,18 +82,24 @@ def gold_room():
         time.sleep(0.5)
         print("Option (1) - You grab anything you can hold and run out the door in the back")
         time.sleep(0.5)
-        monster_room()
         print("Option (2) - You take your time finding the gems that would sell for the most and then leave through the gateway at the back")
         time.sleep(0.5)
-        monster_room()
         print("Option (3) - You leave the gold as it is and run out the exit at the back")
         treasure_option = input()
-        if treasure_option == "1":
+        if treasure_option == "1" and player1.strength> 4 :
             print("You successfully escape")
             monster_room()
-        elif treasure_option == "2":
-            print("You search through the fortune and find a gleaming a ring, different from all the others. You put it on and quietly slip out out the back door.")
-
+        elif treasure_option == "1" and player1.strength< 4 :
+            print("You try to escape but the gold is too heavy. You fall down and hit your head on a purple gemstone. You never wake up, Good job!")
+            exitGame = True
+        elif treasure_option == "2" and player1.agility> 5 :
+            print("You search through the fortune and find a gleaming ring, different from all the others. You put it on and quietly slip out out the back door.")    
+        elif treasure_option == "2" and player1.agility< 5 :
+            print("You slip and fall on the gold, your head making a terrifying crunch as it hits a pile of gold. You die of a skull fracture that pierced your brain, Good job!")
+            exitGame = True
+        elif treasure_option == "3" :
+            print ("You successfully escape")
+            monster_room()
 
 def monster_room():
     print("You enter a room with a monster. The monster is sleeping. Behind the monster is another door. What would you do? (1 , 2 or 3)")
