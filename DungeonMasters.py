@@ -9,6 +9,7 @@ roomColour = "Blue"
 
 # classes
 class mage:
+    type = "Mage"
     health = 100
     mana = 100
     strength = 3
@@ -19,6 +20,7 @@ class mage:
     faith = 12
 
 class warrior:
+    type = "Warrior"
     health = 100
     mana = 100
     strength = 18
@@ -29,6 +31,7 @@ class warrior:
     faith = 10
 
 class rogue:
+    type = "Rogue"
     health = 100
     mana = 100
     strength = 5
@@ -38,13 +41,19 @@ class rogue:
     agility = 10
     faith = 8
 
-Player1wantsToBe = input("Mage, Warrior or Rogue?")
-if Player1wantsToBe == "Mage":
+Player1wantsToBe = input("Mage, Warrior or Rogue?").upper()
+print(Player1wantsToBe)
+if Player1wantsToBe == "MAGE": 
     player1 = mage()
-elif Player1wantsToBe == "Warrior":
+    with open('mage.txt') as m:
+        mage_avatar = m.readlines()
+        print(mage_avatar)
+elif Player1wantsToBe == "WARRIOR":
     player1 = warrior()
-elif Player1wantsToBe == "Rogue":
+elif Player1wantsToBe == "ROGUE":
     player1 = rogue()
+else:
+    print("You have to choose one of the three classes. Please try again. If you did pick one, check your spelling and try again.")
 
 
 # functions
@@ -78,6 +87,8 @@ def introScene():
         checkIfPlayerWantToPlayAgain()
 
 def gold_room():
+        print("player1.type=")
+        print(player1.type)
         print("You suddenly open your eyes and look around you, the room is filled with gleaming gold and dazzling jewels. What will you do?")
         time.sleep(0.5)
         print("Option (1) - You grab anything you can hold and run out the door in the back")
@@ -94,6 +105,7 @@ def gold_room():
             exitGame = True
         elif treasure_option == "2" and player1.agility> 5 :
             print("You search through the fortune and find a gleaming ring, different from all the others. You put it on and quietly slip out out the back door.")    
+            monster_room()
         elif treasure_option == "2" and player1.agility< 5 :
             print("You slip and fall on the gold, your head making a terrifying crunch as it hits a pile of gold. You die of a skull fracture that pierced your brain, Good job!")
             exitGame = True
