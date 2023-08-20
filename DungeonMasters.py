@@ -8,52 +8,55 @@ exitGame = False
 roomColour = "Blue"
 
 # classes
-class mage:
-    type = "Mage"
+class player_template:
+    type = "Undefined"
     health = 100
     mana = 100
-    strength = 3
-    dexterity = 4
-    intelligence = 18
-    charisma = 8
-    agility = 4
-    faith = 12
-
-class warrior:
-    type = "Warrior"
-    health = 100
-    mana = 100
-    strength = 18
-    dexterity = 8
+    strength = 1
+    dexterity = 1
     intelligence = 3
-    charisma = 6
-    agility = 6
-    faith = 10
+    charisma = 1
+    agility = 1
+    faith = 0
 
-class rogue:
-    type = "Rogue"
-    health = 100
-    mana = 100
-    strength = 5
-    dexterity = 18
-    intelligence = 4
-    charisma = 4
-    agility = 10
-    faith = 8
+    def __init__(self, player1wantsToBe):
+        if player1wantsToBe== "MAGE":
+            self.type = "Mage"
+            self.health = 100
+            self.mana = 100
+            self.strength = 3
+            self.dexterity = 4
+            self.intelligence = 18
+            self.charisma = 8
+            self.agility = 4
+            self.faith = 12
+        elif player1wantsToBe == "WARRIOR":
+            self.type = "Warrior"
+            self.health = 100
+            self.mana = 100
+            self.strength = 18
+            self.dexterity = 8
+            self.intelligence = 3
+            self.charisma = 6
+            self.agility = 6
+            self.faith = 10
+        elif player1wantsToBe == "ROGUE":
+            self.type = "Rogue"
+            self.health = 100
+            self.mana = 100
+            self.strength = 5
+            self.dexterity = 18
+            self.intelligence = 4
+            self.charisma = 4
+            self.agility = 10
+            self.faith = 8
+        else:
+            print("Creating default player.")
 
-Player1wantsToBe = input("Mage, Warrior or Rogue?").upper()
-print(Player1wantsToBe)
-if Player1wantsToBe == "MAGE": 
-    player1 = mage()
-    with open('mage.txt') as m:
-        mage_avatar = m.readlines()
-        print(mage_avatar)
-elif Player1wantsToBe == "WARRIOR":
-    player1 = warrior()
-elif Player1wantsToBe == "ROGUE":
-    player1 = rogue()
-else:
-    print("You have to choose one of the three classes. Please try again. If you did pick one, check your spelling and try again.")
+            
+player1wantsToBe = input("Mage, Warrior or Rogue?").upper()
+print(player1wantsToBe)
+player1 = player_template(player1wantsToBe)
 
 
 # functions
@@ -87,8 +90,6 @@ def introScene():
         checkIfPlayerWantToPlayAgain()
 
 def gold_room():
-        print("player1.type=")
-        print(player1.type)
         print("You suddenly open your eyes and look around you, the room is filled with gleaming gold and dazzling jewels. What will you do?")
         time.sleep(0.5)
         print("Option (1) - You grab anything you can hold and run out the door in the back")
