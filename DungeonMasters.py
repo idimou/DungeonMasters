@@ -1,11 +1,11 @@
 # imports
 import time 
 
-
 # initialization of the Dungeon Masters
 # global variables
 exitGame = False
 roomColour = "Blue"
+statPoints = 0
 
 # classes
 class player_template:
@@ -53,6 +53,43 @@ class player_template:
         else:
             print("Creating default player.")
 
+    def printPlayerStats(self):
+        print("--------------------------")
+        print("Player Stats: ")
+        print("Type = " + self.type)
+        print("Health = " + str(self.health))
+        print("Mana = " + str(self.mana))
+        print("Strength = " + str(self.strength))
+        print("Dexterity = " + str(self.dexterity))
+        print("Intelligence = " + str(self.intelligence))
+        print("Charisma = " + str(self.charisma))
+        print("Agility = " + str(self.agility))
+        print("Faith = " + str(self.faith))
+        print("--------------------------")
+   
+    def awardStatPoints(self, statPoints):
+        print("You have been awarded some stat points")
+        statPoints = statPoints + 3
+
+    def statIncrease(self, statPoints):
+        pickAttribute = input("Which attribute would you like to increase? (strength, dexterity, intelligence, charisma, agility, faith)").upper()
+        if pickAttribute == ("STRENGTH"):
+            self.strength = self.strength + statPoints
+        elif pickAttribute == ("DEXTERITY"):
+            self.dexterity = self.dexterity + statPoints
+        elif pickAttribute == ("INTELLIGENCE"):
+            self.intelligence = self.intelligence + statPoints
+        elif pickAttribute == ("CHARISMA"):
+            self.charisma = self.charisma + statPoints
+        elif pickAttribute == ("AGILITY"):
+            self.agility = self.agility + statPoints
+        elif pickAttribute == ("FAITH"):
+            self.faith = self.faith + statPoints
+        else:
+            print("You have not chosen a valid attribute")
+            self.statIncrease(statPoints)
+
+    
             
 player1wantsToBe = input("Mage, Warrior or Rogue?").upper()
 print(player1wantsToBe)
@@ -73,6 +110,7 @@ def CheckIfPlayerWantToPlayAgain():
             CheckIfPlayerWantToPlayAgain()
 
 def introScene():
+    player1.printPlayerStats()
     print("You are in a dark room.")
     time.sleep(0.5)
     print("There is a door to your left and right, which one do you take? (l or r)")
@@ -90,6 +128,8 @@ def introScene():
         checkIfPlayerWantToPlayAgain()
 
 def gold_room():
+        player1.printPlayerStats()
+
         print("You suddenly open your eyes and look around you, the room is filled with gleaming gold and dazzling jewels. What will you do?")
         time.sleep(0.5)
         print("Option (1) - You grab anything you can hold and run out the door in the back")
@@ -100,28 +140,39 @@ def gold_room():
         treasure_option = input()
         if treasure_option == "1" and player1.strength> 4 :
             print("You successfully escape")
+            player1.awardStatPoints(statPoints)
             monster_room()
         elif treasure_option == "1" and player1.strength< 4 :
             print("You try to escape but the gold is too heavy. You fall down and hit your head on a purple gemstone. You never wake up, Good job!")
             exitGame = True
         elif treasure_option == "2" and player1.agility> 5 :
             print("You search through the fortune and find a gleaming ring, different from all the others. You put it on and quietly slip out out the back door.")    
+            player1.awardStatPoints(statPoints)
             monster_room()
         elif treasure_option == "2" and player1.agility< 5 :
             print("You slip and fall on the gold, your head making a terrifying crunch as it hits a pile of gold. You die of a skull fracture that pierced your brain, Good job!")
             exitGame = True
         elif treasure_option == "3" :
             print ("You successfully escape")
+            player1.awardStatPoints(statPoints)            
             monster_room()
 
+
+
+
+
 def monster_room():
+    print(statPoints)
+    player1.printPlayerStats()
+    player1.statIncrease(statPoints)
+    player1.printPlayerStats()
     print("You enter a room with a monster. The monster is sleeping. Behind the monster is another door. What would you do? (1 , 2 or 3)")
     time.sleep(0.5)
     print("Option (1) - You sneak past the monster")
     time.sleep(0.5)
     print("Option (2) - You kill the monster and show your dominance")
     time.sleep(0.5)
-    print("Option (3) - You try to sneak past the monster, but it wakes up and eats you")
+    print("Option (3) - You try to distract the monster")
     monster_option = input()
     if monster_option == "1":
         print("You successfully escape")
