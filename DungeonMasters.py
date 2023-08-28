@@ -1,5 +1,8 @@
 # imports
 import time 
+import os
+
+
 
 # initialization of the Dungeon Masters
 # global variables
@@ -110,7 +113,9 @@ def CheckIfPlayerWantToPlayAgain():
             CheckIfPlayerWantToPlayAgain()
 
 def introScene():
+    os.system('cls')
     player1.printPlayerStats()
+    time.sleep(5)
     print("You are in a dark room.")
     time.sleep(0.5)
     print("There is a door to your left and right, which one do you take? (l or r)")
@@ -128,6 +133,7 @@ def introScene():
         checkIfPlayerWantToPlayAgain()
 
 def gold_room():
+        os.system('cls')
         player1.printPlayerStats()
 
         print("You suddenly open your eyes and look around you, the room is filled with gleaming gold and dazzling jewels. What will you do?")
@@ -162,6 +168,7 @@ def gold_room():
 
 
 def monster_room():
+    os.system('cls')
     print(statPoints)
     player1.printPlayerStats()
     player1.statIncrease(statPoints)
